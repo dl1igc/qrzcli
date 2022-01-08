@@ -1,0 +1,22 @@
+#!/usr/bin/python3
+from qrz import QRZ
+from pathlib import Path
+import sys
+import os
+clear = lambda: os.system('clear')
+callsign="dl1igc"
+while (True):
+    qrz = QRZ(cfg=str(Path.home())+"/.qrz.toml")
+    if (callsign == "q"):
+        sys.exit(0)
+    try:
+        result = qrz.callsign(callsign)
+        clear()
+        print (result['call'])
+        print (result['fname'] + " " + result['name'])
+        print (result['addr2'])
+        print (result['country'])
+    except:
+        clear()
+        print("Unexpected error:", sys.exc_info()[0])
+    callsign = input("Callsing: ") 
